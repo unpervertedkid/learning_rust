@@ -1,32 +1,20 @@
-enum IpAddress {
-    V4(u8,u8,u8,u8),
-    V6(String),
-}
+use rand::Rng;
+use std::ops::Range;
 
-//If you dont speak swahili dont worry too much about these, they're just swahili slang for money
-enum Pesa {
-    Mbao,
-    Chwani,
-    Soo,
-    Punch,
-    Thao,
-    Mita,
-}
 fn main() {
-    let home = IpAddress::V4(127,0,0,1);
-    let loopback = IpAddress::V6(String::from("::1"));
-
     let my_money = Pesa::Thao;
     let my_money_in_shillings = value_in_shillings(my_money);
     println!("I have {} shillings", my_money_in_shillings );
 
-    //Let me try and double my money 😎
+    //Let me try and double my money 😎. Its risky though, I might lose it all 😭
+    println!("Let me try and double my money 😎. Its risky though, I might lose it all 😭");
     let double_my_money_maybe = double_my_money(Some(my_money_in_shillings));
 
     if let Some(money) = double_my_money_maybe {
-        println!("I have double my money: {} 🥳", money);
+        println!("I have double my money🥳\nI now have {} shillings🤑", money);
+    } else {
+        println!("I lost all my money 😭");
     }
-
 }
 
 fn value_in_shillings(pesa: Pesa) -> u64 {
@@ -41,8 +29,26 @@ fn value_in_shillings(pesa: Pesa) -> u64 {
 }
 
 fn double_my_money(maybe_some_money: Option<u64>) -> Option<u64> {
+    let mut rng = rand::thread_rng();
+    let random_number = rng.gen_range(Range { start: 0, end: 10 });
+
     match maybe_some_money {
         None => None,
-        Some(money) => Some(money * 2)
+        Some(money) => {
+            if random_number < 3 {
+                None
+            } else {
+                Some(money * 2)
+            }
+        }
     }
+}
+
+enum Pesa {
+    Mbao,
+    Chwani,
+    Soo,
+    Punch,
+    Thao,
+    Mita,
 }
