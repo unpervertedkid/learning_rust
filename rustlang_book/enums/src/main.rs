@@ -1,8 +1,8 @@
 enum IpAddress {
-    V4(String),
+    V4(u8,u8,u8,u8),
     V6(String),
 }
 fn main() {
-    let home = IpAddress::V4(String::from("127.0.0.1"));
-    let loopback = IpAddress::V4(String::from("::1"));
+    let home = IpAddress::V4(127,0,0,1);
+    let loopback = IpAddress::V6(String::from("::1"));
 }
