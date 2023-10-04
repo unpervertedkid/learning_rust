@@ -26,17 +26,9 @@ fn main() {
 
 //Propagating errors
 fn read_top_secret_title_from_file() -> Result<String, io::Error> {
-    let top_secret_file_result = File::open("top_secret.txt");
-
-    let mut top_secret_file = match top_secret_file_result {
-        Ok(file) => file,
-        Err(error) => return Err(error),
-    };
-
     let mut top_secret_title = String::new();
 
-    match top_secret_file.read_to_string(&mut top_secret_title) {
-        Ok(_) => Ok(top_secret_title),
-        Err(error) => Err(error),
-    }
+    File::open("top_secret.txt")?.read_to_string(&mut top_secret_title)?;
+
+    return Ok(top_secret_title);
 }
