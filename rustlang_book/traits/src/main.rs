@@ -25,6 +25,11 @@ impl Summary for Tweet {
         return format!("{}: {}", self.username, self.content);
     }
 }
+
+pub fn notify(item: &impl Summary) {
+    println!("Breaking news!! {}", item.summarize());
+}
+
 fn main() {
     let tweet = Tweet {
         username: String::from("just_a_kid_with_a_dream"),
@@ -33,7 +38,7 @@ fn main() {
         retweet: false,
     };
 
-    println!("1 new tweet: {}", tweet.summarize());
+    notify(&tweet);
 
     let article = NewsArticle {
         headline: String::from("Penguins win the Stanley Cup Championship!"),
@@ -45,5 +50,5 @@ fn main() {
         ),
     };
 
-    println!("New article available! {}", article.summarize());
+    notify(&article);
 }
