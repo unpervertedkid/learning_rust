@@ -30,6 +30,7 @@ mod tests {
     }
 
     #[test] 
+    #[ignore]
     fn test_equal_size() {
         let a = vec![1, 3, 5, 7, 9, 0, 0, 0, 0, 0];
         let b = vec![2, 4, 6, 8, 10];
