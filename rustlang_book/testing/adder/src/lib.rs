@@ -51,6 +51,7 @@ mod tests {
     }
 
     #[test]
+    #[ignore] //Uncomment to see the test fail
     fn another_one() {
         panic!("So you didn't want another failling test?");
     }
@@ -89,6 +90,7 @@ mod tests {
     }
 
     #[test]
+    #[ignore] // Uncomment to see the test fail
     fn greeting_contains_name() {
         let result = greet("Carol");
         assert!(
