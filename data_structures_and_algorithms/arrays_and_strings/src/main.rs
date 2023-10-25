@@ -41,7 +41,7 @@ mod tests {
 use super::*;
 
 #[test]
-fn test_1() {
+fn test_case_1() {
     let mut input = vec![1,1,1,2,2,3];
     let output = remove_duplicates(&mut input);
     assert_eq!(output, 5);
@@ -49,7 +49,7 @@ fn test_1() {
 }
 
 #[test]
-fn test_2() {
+fn test_case_2() {
     let mut input = vec![0,0,1,1,1,1,2,3,3];
     let output = remove_duplicates(&mut input);
     assert_eq!(output, 7);
