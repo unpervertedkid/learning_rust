@@ -1,22 +1,14 @@
-pub fn is_palindrome(s: String) -> bool {
-    let mut left = 0;
-    let mut right = s.len() - 1;
+pub fn is_subsequence(s: String, t: String) -> bool {
+    let mut s_pointer = 0;
+    let mut t_pointer = 0;
 
-    while left < right {
-        let left_char = s.as_bytes()[left] as char;
-        let right_char = s.as_bytes()[right] as char;
-
-        if !left_char.is_ascii_alphanumeric() {
-            left += 1;
-        } else if !right_char.is_ascii_alphanumeric() {
-            right -= 1;
-        } else if !left_char.eq_ignore_ascii_case(&right_char) {
-            return false;
-        } else {
-            left += 1;
-            right -= 1;
+    while s_pointer < s.len() && t_pointer < t.len() {
+        if s.as_bytes()[s_pointer as usize] == t.as_bytes()[t_pointer as usize] {
+            s_pointer += 1;
         }
+
+        t_pointer += 1;
     }
 
-    return true;
+    return s_pointer == s.len();
 }
