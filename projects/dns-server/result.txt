@@ -1,0 +1,26 @@
+DnsHeader {
+    id: 37686,
+    recursion_desired: true,
+    truncated_message: false,
+    authoritative_answer: false,
+    opcode: 0,
+    response: true,
+    rescode: NOERROR,
+    checking_disabled: false,
+    authed_data: false,
+    z: false,
+    recursion_available: true,
+    questions: 1,
+    answers: 1,
+    authoritative_entries: 0,
+    resource_entries: 0,
+}
+DnsQuestion {
+    name: "riarauniversity.ac.ke",
+    qtype: A,
+}
+A {
+    domain: "riarauniversity.ac.ke",
+    addr: 197.136.17.37,
+    ttl: 674,
+}
