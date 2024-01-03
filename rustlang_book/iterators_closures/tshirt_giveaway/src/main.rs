@@ -55,6 +55,9 @@ fn main() {
     let list = vec![1,2,3];
     println!("Before defining closure: {:?}", list);
 
+
+    // The new thread may outlive the main thread, so we need to use move
+    // to transfer ownership of the list to the new thread
     thread::spawn(move || println!("From thread: {:?}", list))
         .join()
         .unwrap();
