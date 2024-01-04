@@ -1,7 +1,12 @@
 use rand::Rng;
 use std::ops::Range;
+use enums::ip_address::{IpAddress};
 
 fn main() {
+  let home = IpAddress::V4(127,0,0,1);
+
+    println!("{:?}", home);
+
     let my_money = Pesa::Thao;
     let my_money_in_shillings = value_in_shillings(my_money);
     println!("I have {} shillings", my_money_in_shillings );
