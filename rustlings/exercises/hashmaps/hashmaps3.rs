@@ -38,12 +38,12 @@ fn build_scores_table(results: String) -> HashMap<String, Team> {
         // goals scored by team_2 will be the number of goals conceded by
         // team_1.
 
-        let mut team_1 = Team {
+        let team_1 = Team {
             goals_scored: team_1_score,
             goals_conceded: team_2_score,
         };
 
-        let mut team_2 = Team {
+        let team_2 = Team {
             goals_scored: team_2_score,
             goals_conceded: team_1_score,
         };
