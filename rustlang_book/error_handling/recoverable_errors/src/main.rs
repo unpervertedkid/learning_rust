@@ -18,7 +18,7 @@ fn main() {
         };
 
         // Alternatives to using match to handle different errors
-        let top_secret_file = File::open("top_secret.txt").expect("Failed to open the top secret file");
+        let _top_secret_file = File::open("top_secret.txt").expect("Failed to open the top secret file");
 
         let top_secret_file_title = read_top_secret_title_from_file().expect("Title should be present");
         println!("The top secret title is: {}", &top_secret_file_title)
