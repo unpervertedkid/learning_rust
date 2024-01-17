@@ -1,14 +1,19 @@
 use std::thread;
 
 fn main() {
+    divider();
+    println!("Capturing references and moving ownership");
     capture_immutably();
     divider();
-    
+
     capture_mutably();
     divider();
-    
+
     take_ownership();
     divider();
+
+    println!("Moving captured values out of closures and the Fn traits");
+    fn_mut_trait();
 }
 
 fn capture_immutably() {
@@ -42,6 +47,36 @@ fn take_ownership() {
         .join()
         .expect("Failed to join thread");
 }
+
+#[derive(Debug)]
+struct Rectangle {
+    width: u32,
+    _height: u32,
+}
+
+fn fn_mut_trait() {
+    let mut list = [
+        Rectangle {
+            width: 30,
+            _height: 50,
+        },
+        Rectangle {
+            width: 10,
+            _height: 20,
+        },
+        Rectangle {
+            width: 40,
+            _height: 60,
+        },
+    ];
+    
+    println!("Before sorting: {:#?}", list);
+
+    list.sort_by_key(|rectangle| rectangle.width);
+    
+    println!("After sorting: \n{:#?}", list);
+}
+
 fn divider() {
     println!("------------------------------------------------");
 }
