@@ -1,5 +1,3 @@
-
-
 struct Counter {
     count: usize,
     up_to: usize,
@@ -47,7 +45,7 @@ mod tests {
         assert_eq!(counter.next(), Some(5));
         assert_eq!(counter.next(), None);
     }
-    
+
     #[test]
     fn does_not_yield_when_upto_is_0() {
         let mut counter = Counter::new(0);

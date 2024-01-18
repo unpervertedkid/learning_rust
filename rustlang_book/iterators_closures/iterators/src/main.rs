@@ -15,13 +15,16 @@ struct Shoe {
 }
 
 fn shoes_in_size(shoes: Vec<Shoe>, shoe_size: u32) -> Vec<Shoe> {
-    shoes.into_iter().filter(|shoe| shoe.size == shoe_size).collect()
+    shoes
+        .into_iter()
+        .filter(|shoe| shoe.size == shoe_size)
+        .collect()
 }
 
 #[cfg(test)]
 mod test {
     use super::*;
-    
+
     #[test]
     fn iterator_demonstration() {
         let vector = vec![1, 2, 3];
@@ -52,7 +55,7 @@ mod test {
 
         assert_eq!(vector_2, vec![2, 3, 4]);
     }
-    
+
     #[test]
     fn filters_by_size() {
         let shoes = vec![
