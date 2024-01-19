@@ -1,2 +1,2 @@
-mod custom_iterator;
+mod counter;
 mod fibonacci;
