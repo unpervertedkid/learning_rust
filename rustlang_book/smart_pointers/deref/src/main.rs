@@ -22,4 +22,11 @@ fn main() {
 
     assert_eq!(5, x);
     assert_eq!(5, *y);
+
+    let boxed_name = MyBox::new(String::from("Rust"));
+    hello(&boxed_name);
+}
+
+fn hello(name: &str) {
+    println!("Hello, {name}");
 }
