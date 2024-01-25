@@ -13,3 +13,7 @@ We can create two iterators, one that yields multiples of 3 and another one that
 
 We can then call next() on both iterators so long as the condition is met that the next value is less than 1000 and add the values together.
 
+### Simple but efficient solution
+Create one iterator that generates multiples of 3 and 5 and add them together.
+Call the sum() function on the iterator and pass in the range of numbers to generate.
+
