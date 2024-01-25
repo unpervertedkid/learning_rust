@@ -7,7 +7,7 @@ impl MultiplesOf {
     fn new(multiple_of: i32) -> Self {
         MultiplesOf {
             current_multiple: multiple_of,
-            multiple_of: multiple_of,
+            multiple_of,
         }
     }
 }
