@@ -1,4 +1,4 @@
-use std::{thread, time::Duration};
+use std::{thread, time::Duration, vec};
 
 fn main() {
     let handle = thread::spawn(|| {
@@ -13,5 +13,14 @@ fn main() {
         thread::sleep(Duration::from_millis(1));
     }
     
+    handle.join().unwrap();
+
+    // Using move closures with threads
+    let v = vec![1,2,3];
+
+    let handle = thread::spawn(move || {
+        println!("Here's a vector: {:?}", v);
+    });
+
     handle.join().unwrap();
 }
