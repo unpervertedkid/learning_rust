@@ -4,35 +4,30 @@ pub struct Post {
 }
 
 impl Post {
-    pub fn new() -> Self {
+    fn new() -> Self {
         Post {
             state: Some(Box::new(Draft {})),
             content: String::new(),
         }
     }
 
-    pub fn add_text(&mut self, text: &str) {
-        self.content.push_str(text);
-    }
-
-    pub fn content(&self) -> &str {
+    fn content(&self) -> &str {
         self.state.as_ref().unwrap().content(self)
     }
 
-    pub fn request_review(&mut self) {
-        if let Some(state) = self.state.take() {
-            self.state = Some(state.request_review())
-        }
+    fn add_text(&mut self, text: &str) {
+        self.content.push_str(text);
     }
-    pub fn approve(&mut self) {
+
+    fn request_review(&mut self) {
         if let Some(state) = self.state.take() {
-            self.state = Some(state.approve());
+            self.state = Some(state.request_review());
         }
     }
 
-    pub fn reject(&mut self) {
+    fn approve(&mut self) {
         if let Some(state) = self.state.take() {
-            self.state = Some(state.reject());
+            self.state = Some(state.approve());
         }
     }
 }
@@ -40,7 +35,6 @@ impl Post {
 trait State {
     fn request_review(self: Box<Self>) -> Box<dyn State>;
     fn approve(self: Box<Self>) -> Box<dyn State>;
-    fn reject(self: Box<Self>) -> Box<dyn State>;
     fn content<'a>(&self, post: &'a Post) -> &'a str {
         ""
     }
@@ -50,31 +44,23 @@ struct Draft {}
 
 impl State for Draft {
     fn request_review(self: Box<Self>) -> Box<dyn State> {
-        Box::new(PendingReview {})
+        Box::new(Pending {})
     }
 
     fn approve(self: Box<Self>) -> Box<dyn State> {
         self
     }
-
-    fn reject(self: Box<Self>) -> Box<dyn State> {
-        self
-    }
 }
 
-struct PendingReview {}
+struct Pending {}
 
-impl State for PendingReview {
+impl State for Pending {
     fn request_review(self: Box<Self>) -> Box<dyn State> {
         self
     }
 
     fn approve(self: Box<Self>) -> Box<dyn State> {
         Box::new(Published {})
-    }
-
-    fn reject(self: Box<Self>) -> Box<dyn State> {
-        Box::new(Draft {})
     }
 }
 
@@ -92,10 +78,6 @@ impl State for Published {
     fn content<'a>(&self, post: &'a Post) -> &'a str {
         &post.content
     }
-
-    fn reject(self: Box<Self>) -> Box<dyn State> {
-        self
-    }
 }
 
 #[cfg(test)]
@@ -103,39 +85,29 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_draft_content() {
+    fn creating_a_post_should_set_state_to_draft() {
         let mut post = Post::new();
-        post.add_text("Hello World");
+        post.add_text("Hey, this is a blog post");
 
         assert_eq!("", post.content());
     }
 
     #[test]
-    fn test_pending_review() {
+    fn requesting_review_on_a_post_should_set_state_to_pending() {
         let mut post = Post::new();
-        post.add_text("Hello World");
+        post.add_text("Hey, this is a blog post");
         post.request_review();
 
         assert_eq!("", post.content());
     }
-    
+
     #[test]
-    fn test_approved_review() {
+    fn approving_a_review_should_set_state_to_published() {
         let mut post = Post::new();
-        post.add_text("Hello World");
+        post.add_text("Hey, this is a blog post");
         post.request_review();
         post.approve();
 
-        assert_eq!("Hello World", post.content());
-    }
-    
-    #[test]
-    fn test_rejected_review() {
-        let mut post = Post::new();
-        post.add_text("Hello World");
-        post.request_review();
-        post.reject();
-
-        assert_eq!("", post.content());
+        assert_eq!("Hey, this is a blog post", post.content());
     }
 }
