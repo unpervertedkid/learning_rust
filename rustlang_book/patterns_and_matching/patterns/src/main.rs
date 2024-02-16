@@ -1,15 +1,18 @@
 fn main() {
     println!("10 + 1 = {}", add_one(Some(10)).unwrap());
 
+    separator();
     let is_raining = Some(true);
     let preferred_color = Some("Black");
 
     get_dress_code(&is_raining, preferred_color);
 
+    separator();
     let mut tasks = vec!["Wake up", "Plan my day", "Read a chapter from the book how to be bored", "Do one chapter from the rust book"];
 
     task_manager(&mut tasks);
 
+    separator();
     let shopping_list = vec!["Tomatoes", "Eggs", "Toiletries", "Wet wipes", "Avocadoes"];
     print_shopping_list(&shopping_list);
 }
@@ -43,9 +46,13 @@ fn task_manager(tasks: &mut Vec<&str>) {
 
 fn print_shopping_list(list: &Vec<&str>) {
     println!("Shopping List");
-    println!("-------------------------------");
+    separator();
 
    for (index, item) in list.iter().enumerate() {
         println!("{}: {}", index + 1, item);
     }
+}
+
+fn separator() {
+    println!("----------------------------------");
 }
