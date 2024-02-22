@@ -14,14 +14,14 @@ fn calling_unsafe_function() {
 unsafe fn dangerous() {}
 
 fn creating_safe_abstraction_over_unsafe_code() {
-    let mut vector = vec![1,2,3,4,5,6];
+    let mut vector = vec![1, 2, 3, 4, 5, 6];
 
     let reference = &mut vector[..];
 
     let (a, b) = reference.split_at_mut(3);
 
-    assert_eq!(a, &mut [1,2,3]);
-    assert_eq!(b, &mut [4,5,6]);
+    assert_eq!(a, &mut [1, 2, 3]);
+    assert_eq!(b, &mut [4, 5, 6]);
 }
 
 #[allow(dead_code)]
@@ -33,9 +33,9 @@ fn split_at_mut(values: &mut [i32], mid: usize) -> (&mut [i32], &mut [i32]) {
 
     unsafe {
         (
-        slice::from_raw_parts_mut(pointer, mid),
-        slice::from_raw_parts_mut(pointer.add(mid), length - mid),
-            )
+            slice::from_raw_parts_mut(pointer, mid),
+            slice::from_raw_parts_mut(pointer.add(mid), length - mid),
+        )
     }
 }
 
@@ -45,13 +45,13 @@ mod tests {
 
     #[test]
     fn splits_vector() {
-        let mut vector = vec![1,2,3,4,5,6];
+        let mut vector = vec![1, 2, 3, 4, 5, 6];
 
         let reference = &mut vector;
 
-        let (a, b ) = split_at_mut(reference, 3);
+        let (a, b) = split_at_mut(reference, 3);
 
-        assert_eq!(a, &mut [1,2,3]);
-        assert_eq!(b, &mut [4,5,6]);
+        assert_eq!(a, &mut [1, 2, 3]);
+        assert_eq!(b, &mut [4, 5, 6]);
     }
 }
