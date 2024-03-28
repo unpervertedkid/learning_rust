@@ -7,6 +7,8 @@
 // Execute `rustlings hint from_into` or use the `hint` watch subcommand for a
 // hint.
 
+use std::path::Iter;
+
 #[derive(Debug)]
 struct Person {
     name: String,
@@ -40,10 +42,18 @@ impl Default for Person {
 // If while parsing the age, something goes wrong, then return the default of
 // Person Otherwise, then return an instantiated Person object with the results
 
-// I AM NOT DONE
 
 impl From<&str> for Person {
     fn from(s: &str) -> Person {
+        let mut split = s.split(",");
+        let name = split.next().unwrap_or("").to_string();
+        let age = split.next().unwrap_or("").parse::<usize>().unwrap_or_default();
+
+        if name.is_empty() || age == 0 {
+            Person::default()
+        } else {
+            Person { name, age }
+        }
     }
 }
 
